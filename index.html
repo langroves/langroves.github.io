@@ -1,7 +1,17 @@
 <!DOCTYPE html>
 <html><head> <meta charset="UTF-8">
    <title>Select a Major</title>
-   <script src="https://cdnjs.cloudflare.com/ajax/libs/handlebars.js/4.7.7/handlebars.min.js"></script>
+   <script src="https://cdnjs.cloudflare.com/ajax/libs/handlebars.js/4.7.7/handlebars.min.js">
+   
+   type="text/x-handlebars-template" id="tableTemplate">
+            <table>
+               {{#each rows}}
+                  <tr>
+                     <td>{{Name}}</td><td>{{Midterm}}</td><td>{{Final}}</td>
+                  </tr>
+               {{/each}}
+             </table>
+   </script>
    
 </head>
 
@@ -24,15 +34,6 @@ document.addEventListener('DOMContentLoaded', function() {
 
             var tableContents = "<table cellspacing='5'>"    
             tableContents += "<tr><td>Name</td><td>Midterm</td><td>Final</td></tr>";
-
-        type="text/x-handlebars-template" id="tableTemplate">
-            <table>
-               {{#each rows}}
-                  <tr>
-                     <td>{{Name}}</td><td>{{Midterm}}</td><td>{{Final}}</td>
-                  </tr>
-               {{/each}}
-             </table>
 
             }
 
