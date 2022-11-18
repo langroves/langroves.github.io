@@ -20,7 +20,7 @@
         
         document.querySelector('#btn').onclick = async function(){
                     var respsonse = await fetch('cit5students.json');
-                //console.log(response);
+                console.log(response);
                     if(response.ok) {
                         var data = await response.json();
                         
