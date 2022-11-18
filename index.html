@@ -4,7 +4,7 @@
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/handlebars.js/4.7.7/handlebars.min.js"></script>
 
-      <!-- bootstrap, need to use https for these links -->
+     
       <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
 	  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
       <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
@@ -13,52 +13,46 @@
 </head>
 <body>
   <div class="container">
-      <h2>Select a Menu</h2>
+      <h2>Select a Major</h2>
       <div style='padding: 5px;'> 
-         <button type='button' class="btn btn-primary" onClick="getData('breakfast')">Breakfast</button> 
-         <button type='button' class="btn btn-primary" onClick="getData('lunch')">Lunch</button> 
+         <button type='button' class="btn btn-primary" onClick="getData('breakfast')">CIT Majors</button> 
+         <button type='button' class="btn btn-primary" onClick="getData('lunch')">Business Majors</button> 
       </div>
   
   <h3>We filter our dataset by Major</h3>
 
-  <div id="menuTable"></div>
+  <div id="gradeTable"></div>
 
-      <p>Menu Data originally provided by  <a href='https://manual.cs50.net/api/food/'>manual.cs50.net/api/food/</a></p>
-      <p>Items are from HUDS, which is the Harvard University Dining Services. The above link is very old, and no longer leads 
-to information on the food API, and I can find no updated information on attribution.</p>
-      <p>CS 50 is a popular intro to computer science course offered by Harvard University.</p> 
-  </div>   <!-- end class='container'   -->
+  </div>  
   </body>
 
- <!-- Handlebars template -->
-  <script type="text/x-handlebars-template" id="menuTemplate">
+  <script type="text/x-handlebars-template" id="gradeTemplate">
       <table class="table table-striped">
-          <tr><th>Item</th><th>Meal</th><th>Category</th><th>Portion</th></tr>
+          <tr><th>Name</th><th>Major</th><th>Midterm</th><th>Final</th></tr>
              {{#each rows}}
                 <tr>
-                     <td>{{name}}</td><td>{{meal}}</td><td>{{category}}</td><td>{{portion}}</td>
+                     <td>{{Name}}</td><td>{{Major}}</td><td>{{Midterm}}</td><td>{{Final}}</td>
                 </tr>
              {{/each}}
       </table>
   </script>
 
-  <!-- application ajax code -->
   <script>
-    async function getData(selected_meal) {
+    async function getData(selected_major) {
         var response = await fetch('cit5students.json');   
 
         if(response.ok) {
             var data = await response.json();
 
-            meal_items = data.filter( (item) => item.meal == selected_meal );    
+            major_item = data.filter( (item) => item.major == selected_major );    
                 
-           var templateText = document.getElementById('menuTemplate').innerHTML;
+           var templateText = document.getElementById('gradeTemplate').innerHTML;
            var compiledTemplateText = Handlebars.compile(templateText);   
-           compiledHtml = compiledTemplateText({ rows: meal_items })      
-           document.getElementById('menuTable').innerHTML = compiledHtml; 
+           compiledHtml = compiledTemplateText({ rows: major_item })      
+           document.getElementById('gradeTable').innerHTML = compiledHtml; 
        }
        else {
-           document.querySelector('#menuTable').innerHTML = "There was an error, or menu items not found";
+           document.querySelector('#gradeTable').innerHTML = "There was an error";
        }	
  
   }
