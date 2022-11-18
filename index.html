@@ -19,7 +19,7 @@
     document.addEventListener('DOMContentLoaded' , function() {
         
         document.querySelector('#btn').onclick = async function(){
-                    var respsonse = await fetch('cit5students.json');
+                    var response = await fetch('cit5students.json');
                 console.log(response);
                     if(response.ok) {
                         var data = await response.json();
