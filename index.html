@@ -4,10 +4,45 @@
     <meta charset-"UTF-8">
   <title>Select a Major</title>
  </head>
- <body>
+ <body style='margin-left: 30px;'>
    
    <h1>Datasets filtered by Majors</h1>
    
    <p></p>
+     
+   <input type="button" id='btn' value="Filter Scores">
+        
+     <div id="result"></div>
+     
+<script>
+    
+    document.addEventListener('DOMContentLoaded' , function() {
+        
+        document.querySelector('#btn').onclick = async function(){
+                    var respsonse = await fetch('cit5students.json');
+                console.log(response);
+                    if(response.ok) {
+                        var data = await response.json();
+                        
+                        var tableContents = "<table cellspacing='5'>"
+                        tableContents += "<tr><td>Name</td><td>Midterm</td><td>Final</td></tr>";
+                        
+                for(i = 0; i < data.length; i++)       {
+                    tableContents += `<tr><td> ${data[i].name} </td>
+                                                <td> ${data[i].midterm} </td>
+                                                <td> ${data[i].final} </td></tr>`;
+                }
+                        
+                tableContents += "</table>";
+                 
+                document.querySelector('#result').innerHTML = tableContents;
+                    }
+                    else {
+                            document.querySelector('#result').innerHTML = "Data not found";
+                    }
+        };
+        });
+     </script>
+                     
    
 </body></html>
